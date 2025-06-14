@@ -20,6 +20,7 @@ public struct SwiftDownEditor: UIViewRepresentable {
   }
 
     private(set) var isEditable: Bool = true
+    private(set) var isScrollEnabled: Bool = true
     private(set) var theme: Theme = Theme.BuiltIn.defaultDark.theme()
     private(set) var insetsSize: CGFloat = 0
     private(set) var autocapitalizationType: UITextAutocapitalizationType = .sentences
@@ -49,7 +50,7 @@ public struct SwiftDownEditor: UIViewRepresentable {
       swiftDown.storage.applyBody = { Theme.applyBody(with: self.theme) }
       swiftDown.delegate = context.coordinator
       swiftDown.isEditable = isEditable
-      swiftDown.isScrollEnabled = true
+      swiftDown.isScrollEnabled = isScrollEnabled
       swiftDown.keyboardType = keyboardType
       swiftDown.hasKeyboardToolbar = hasKeyboardToolbar
       swiftDown.autocapitalizationType = autocapitalizationType
@@ -139,6 +140,12 @@ public struct SwiftDownEditor: UIViewRepresentable {
       editor.hasKeyboardToolbar = hasKeyboardToolbar
       return editor
     }
+      
+      public func isScrollEnabled(_ isScrollEnabled: Bool) -> Self {
+          var editor = self
+          editor.isScrollEnabled = isScrollEnabled
+          return editor
+      }
   }
 #else
   // MARK: - SwiftDownEditor macOS
